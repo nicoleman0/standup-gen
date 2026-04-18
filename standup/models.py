@@ -1,6 +1,9 @@
+from dataclasses import dataclass
+
+@dataclass
 class Commit:
-    def __init__(self, hash, date, author, message):
-        self.hash = hash
-        self.date = date
-        self.author = author
-        self.message = message
+    hash: str
+    date: str
+    author: str
+    message: str
+
