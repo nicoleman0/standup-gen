@@ -2,6 +2,9 @@ import argparse
 from standup.git import get_raw_log, parse_log
 from standup.formatter import format_log
 from standup.summarizer import summarize_commits
+from dotenv import load_dotenv
+
+load_dotenv()
 
 parser = argparse.ArgumentParser(description="Generate a standup summary from git log.")
 parser.add_argument("repo_path", help="Path to the git repository")
