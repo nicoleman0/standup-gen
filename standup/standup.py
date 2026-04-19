@@ -1,6 +1,7 @@
 import argparse
 from standup.git import get_raw_log, parse_log
 from standup.formatter import format_log
+from standup.summarizer import summarize_commits
 
 parser = argparse.ArgumentParser(description="Generate a standup summary from git log.")
 parser.add_argument("repo_path", help="Path to the git repository")
@@ -14,6 +15,8 @@ args = parser.parse_args()
 raw_log = get_raw_log(args.repo_path, args.since, args.until, args.author)
 commits = parse_log(raw_log)
 summary = format_log(commits)
+if args.summarize:
+    summary = summarize_commits(summary)
 if args.output:
     with open(args.output, "w") as f:
         f.write(summary)
