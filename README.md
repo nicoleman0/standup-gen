@@ -35,7 +35,7 @@ standup /path/to/your/repo --since 1.day.ago --summarize
 
 ## Personalizing the AI summary
 
-The AI prompt in `standup/summarizer.py` is written for a developer named Nick. If you're sharing this with others, update the system prompt to use the right name:
+The AI prompt in `standup/summarizer.py` is written for myself (Nick). So update the prompt in the summarizer file if you want it to be accurate for you.
 
 ```python
 "content": (
