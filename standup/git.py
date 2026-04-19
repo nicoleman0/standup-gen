@@ -7,15 +7,20 @@ def get_raw_log(repo_path: str, since: str, until: str, author: str | None = Non
 
     Fetches the specified raw git logs.
     """
+    cmd = ["git", "log",
+        f"--since={since}",
+        f"--until={until}",
+        "--pretty=format:%H|%ad|%an|%s",
+        "--date=short"]
+    
+    if author:
+        cmd.append(f"--author={author}")
+
     result = subprocess.run(
-        ["git", "log",
-            f"--since={since}",
-            f"--until={until}",
-            "--pretty=format:%H|%ad|%an|%s",
-            "--date=short"], 
-            text=True, # necessary to get a usable output 
-            capture_output=True,
-            cwd=repo_path # Without this, git log runs in whatever directory you're in
+        cmd,
+        text=True, # necessary to get a usable output 
+        capture_output=True,
+        cwd=repo_path # Without this, git log runs in whatever directory you're in
     )
     if result.returncode !=0:
         raise RuntimeError(result.stderr)
