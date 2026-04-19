@@ -1,12 +1,9 @@
-# command to wrap:
-# git log --since="2026-04-01" --until="2026-04-18" --pretty=format:"%H|%ad|%an|%s" --date=short
-
 import subprocess
 from standup.models import Commit
 
-def get_raw_log(repo_path: str, since: str, until: str) -> str:
+def get_raw_log(repo_path: str, since: str, until: str, author: str | None = None) -> str:
     """
-    args: repo_path, since, until
+    args: repo_path, since, until, author
 
     Fetches the specified raw git logs.
     """
@@ -25,5 +22,10 @@ def get_raw_log(repo_path: str, since: str, until: str) -> str:
     return result.stdout
 
 def parse_log(raw_log: str) -> list[Commit]:
+    """
+    args: raw_log
+    
+    Parses the raw git log into a list of Commit objects.
+    """
     lines = raw_log.splitlines()
-    return [Commit(*line.split("|")) for line in lines]
+    return [Commit(*line.split("|")) for line in lines] # Unpacking the split line directly into the Commit dataclass constructor
