@@ -8,3 +8,6 @@ dependencies = [
     "groq>=1.2.0",
     "python-dotenv>=1.2.2",
 ]
+
+[project.scripts]
+standup = "standup.standup:main"
